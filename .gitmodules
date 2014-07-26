@@ -1,0 +1,3 @@
+[submodule "thrift-discovery-service"]
+	path = thrift-discovery-service
+	url = git@github.com:VitaliyOliynyk/thrift-discovery-service.git
