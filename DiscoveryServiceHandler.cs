@@ -14,7 +14,7 @@ namespace thrift_discovery_service_csharp
 
         public DiscoveryServiceHandler()
         {
-            serviceInfos["calculator"] = buildServiceInfo("localhost", makeRandomPort());
+            serviceInfos["calculator"] = buildServiceInfo("calculator", "localhost", makeRandomPort());
         }
 
 
@@ -33,21 +33,20 @@ namespace thrift_discovery_service_csharp
         {
             Random random = new Random();
             short port;
-            lock(this) {
-                do
-                {
-                    port = (short) random.Next(10002, 20000);
-                } while (usedPorts.Contains((short)port));
-                usedPorts.Add(port);
-            }
+            do
+            {
+                port = (short)random.Next(10002, 20000);
+            } while (usedPorts.Contains((short)port));
+            usedPorts.Add(port);
             return port;       
         }
 
-        private ServiceInfo buildServiceInfo(string host, short port)
+        private ServiceInfo buildServiceInfo(string serviceName, string host, short port)
         {
             ServiceInfo serviceInfo = new ServiceInfo();
             serviceInfo.Host = host;
             serviceInfo.Port = port;
+            Console.WriteLine("Register service definition, service:'{0}', host:{1}, port:{2}", serviceName, host, port);     
             return serviceInfo;
         }
     }
