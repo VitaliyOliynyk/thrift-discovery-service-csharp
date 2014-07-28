@@ -37,7 +37,7 @@ namespace thrift_discovery_service_csharp
             DiscoveryService.Iface handler = new DiscoveryServiceHandler();
             DiscoveryService.Processor processor = new DiscoveryService.Processor(handler);
             TServerTransport serverTransport = new TServerSocket(portNumber);
-            TServer server = new TThreadPoolServer(processor, serverTransport);
+            TServer server = new TSimpleServer(processor, serverTransport);
             Console.WriteLine("Starting the server...");
             server.Serve();
         }
