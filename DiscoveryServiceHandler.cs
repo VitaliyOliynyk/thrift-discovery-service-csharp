@@ -20,13 +20,19 @@ namespace thrift_discovery_service_csharp
 
         public ServiceInfo getInfo(string serviceName)
         {
+
+            log("Invoke DiscoveryServiceHandler.getInfo('{0}')", serviceName);
             if (serviceInfos.ContainsKey(serviceName)) 
             {
                 return serviceInfos[serviceName];
             }
-            ServiceNotFoundException serviceNotFoundException = new ServiceNotFoundException();
-            serviceNotFoundException.Message = "Service '" + serviceName + "' not found"; 
-            throw serviceNotFoundException;
+            else
+            {
+                ServiceNotFoundException serviceNotFoundException = new ServiceNotFoundException();
+                serviceNotFoundException.Message = "Service '" + serviceName + "' not found";
+                throw serviceNotFoundException;
+
+            }
         }
 
         private short makeRandomPort()
@@ -46,8 +52,13 @@ namespace thrift_discovery_service_csharp
             ServiceInfo serviceInfo = new ServiceInfo();
             serviceInfo.Host = host;
             serviceInfo.Port = port;
-            Console.WriteLine("Register service definition, service:'{0}', host:{1}, port:{2}", serviceName, host, port);     
+            log("Register service definition, service:'{0}', host:{1}, port:{2}", serviceName, host, port);     
             return serviceInfo;
+        }
+
+        private void log(String message, params Object[] args)
+        {
+            Console.WriteLine(message, args);
         }
     }
 }
