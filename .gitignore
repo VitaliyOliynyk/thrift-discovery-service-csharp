@@ -9,7 +9,7 @@
 target/
 build/
 nbproject/
-gen-csharp/thrifttutorial
+gen-csharp/*
 /bin
 /obj
 /Debug
